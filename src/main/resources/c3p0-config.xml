@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<c3p0-config>
+    <default-config>
+        <!--mysql数据库连接的各项参数-->
+        <property name="driverClass">com.mysql.jdbc.Driver</property>
+        <property name="jdbcUrl">jdbc:mysql://115.159.40.140:3306/test</property>
+        <property name="user">root</property>
+        <property name="password">1234</property>
+        <!--配置数据库连接池的初始连接数、最小链接数、获取连接数、最大连接数、最大空闲时间-->
+        <property name="initialPoolSize">10</property>
+        <property name="minPoolSize">10</property>
+        <property name="acquireIncrement">5</property>
+        <property name="maxPoolSize">100</property>
+        <property name="maxIdleTime">30</property>
+    </default-config>
+
+    <named-config name="test">
+        <property name="driverClass">com.mysql.jdbc.Driver</property>
+        <property name="jdbcUrl">jdbc:mysql://192.168.1.238:9696/kingshard</property>
+        <property name="user">ds</property>
+        <property name="password">ameyads</property>
+        <!--配置数据库连接池的初始连接数、最小链接数、获取连接数、最大连接数、最大空闲时间-->
+        <property name="initialPoolSize">10</property>
+        <property name="minPoolSize">10</property>
+        <property name="acquireIncrement">5</property>
+        <property name="maxPoolSize">100</property>
+        <property name="maxIdleTime">30</property>
+    </named-config>
+
+    <named-config name="localhost">
+        <property name="driverClass">com.mysql.jdbc.Driver</property>
+        <property name="jdbcUrl">jdbc:mysql://localhost:3306/spider</property>
+        <property name="user">root</property>
+        <property name="password">123</property>
+        <!--配置数据库连接池的初始连接数、最小链接数、获取连接数、最大连接数、最大空闲时间-->
+        <property name="initialPoolSize">10</property>
+        <property name="minPoolSize">10</property>
+        <property name="acquireIncrement">5</property>
+        <property name="maxPoolSize">50</property>
+        <property name="maxIdleTime">30</property>
+    </named-config>
+</c3p0-config>

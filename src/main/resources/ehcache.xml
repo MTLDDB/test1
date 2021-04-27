@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd">
+
+    <!-- 磁盘缓存位置 默认的临时目录， -->
+    <diskStore path="java.io.tmpdir/ehcache"/>
+    <!-- 默认缓存 -->
+    <defaultCache
+            maxEntriesLocalHeap="10000"
+            eternal="false"
+            timeToIdleSeconds="120"
+            timeToLiveSeconds="120"
+            maxEntriesLocalDisk="10000000"
+            diskExpiryThreadIntervalSeconds="120"
+            memoryStoreEvictionPolicy="LRU">
+        <persistence strategy="localTempSwap"/>
+    </defaultCache>
+
+    <!--maxElementsInMemory  内存中允许存储的最大的元素个数 0 无限制-->
+    <!--eternal 是否为永久的-->
+    <!--timeToIdleSeconds  闲置时间  eternal=false 生效-->
+    <!--overflowToDisk   ：内存不足，是否开启磁盘缓存 -->
+    <!--diskPersistent   ：是否在磁盘上持久化 -->
+    <cache name="ameyaProductInfoCacheRepertory"
+           maxElementsInMemory="1"
+           eternal="true"
+           overflowToDisk="true"
+           maxElementsOnDisk="0"
+           diskPersistent="true"
+           memoryStoreEvictionPolicy="LRU"/>
+</ehcache>

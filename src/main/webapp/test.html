@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ORDER</title>
+	<meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+	<!-- <script type="text/javascript" src="jquery.min.js"></script> -->
+	<!-- <script type="text/javascript" src="jquery.easyui.min.js"></script> -->
+	<link rel="stylesheet" type="text/css" href="/static/css/easyui.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/icon.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/demo.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/jquery.tagsinput.css">
+	<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/static/js/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="/static/js/jquery.tagsinput.js"></script>
+
+</head>
+<body>
+<div id="p" style="width:400px;"></div>
+<input name="tags" id="tags"/>
+<input name="tags" id="tags_1" value="foo,bar,baz" />
+</body>
+
+
+<script type="text/javascript">
+	$('#tags_1').importTags('');
+	$('#tags_1').tagsInput({
+		width:'auto',
+		onAddTag:function(tag){
+			console.log('增加了'+tag)
+		},
+		onRemoveTag:function(tag){
+			console.log('删除了'+tag)
+		},
+		placeholderColor: '#ffffff' //设置defaultText的颜色
+	});
+	$('#tags').tagsInput();
+	// $('#tags').tagsInput({
+	// 	autocomplete_url:'http://myserver.com/api/autocomplete'
+	// });
+//  <!-- $('#p').progressbar({ -->
+// 		<!-- value:1, -->
+// 		<!-- height:30, -->
+// 		<!-- width:200, -->
+// 		<!-- text:'{value}%', -->
+// 		<!-- onChange:function(newValue,oldValue){ -->
+// 		<!-- console.log('新:'+newValue+'旧:'+oldValue); -->
+// 		<!-- }, -->
+// 	<!-- });   -->
+// <!-- var i=1; -->
+// <!-- var time=setInterval(function(){ -->
+// 	<!-- i++; -->
+// 	<!-- if(i>100){ -->
+// 		<!-- clearInterval(time); -->
+// 	<!-- } -->
+// 	<!-- console.log(i); -->
+// 	<!-- $('#p').progressbar('setValue',i); -->
+// 	<!-- },1000); -->
+
+	
+	function start(){
+		$.messager.progress({
+								title: '系统消息',
+								msg: '数据处理中...',
+								interval: 0
+							});
+		var css = {"top": "", "right": "0px", "left": "", "bottom": "0px", "height": "108px"};
+		$(".messager-window").attr('id', "progressname");
+		$("#progressname").css(css)
+		$("#progressname").next().css(css)
+		$("div").remove(".window-mask");
+		var progressBar = $.messager.progress('bar');
+		showprogress(progressBar, "attr", "");
+	
+	}
+	start();
+	setTimeout(function(){
+		start();
+	},10*1000);
+	//进度条函数
+	var i=1;
+    // <!-- function showprogress1(progressBar, kind, init) { -->
+	// 		<!-- var time=init; -->
+	// 		<!-- if(i>100){ -->
+	// 			<!-- progressBar.progressbar('resize'); -->
+	// 			<!-- $.messager.progress("close"); -->
+	// 			<!-- clearInterval(time); -->
+	// 			<!-- return; -->
+	// 		<!-- }else{ -->
+	// 			<!-- progressBar.progressbar('setValue',i++); -->
+	// 			<!-- time = setInterval(showprogress1(progressBar, kind, time), 100)//200ms调用一次 -->
+	// 		<!-- } -->
+    // <!-- } -->
+	
+	
+	 //进度条函数
+    function showprogress(progressBar, kind, init) {
+        var timer = init;
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            cache: false,
+            url: "http://localhost/getProgressResult",
+            data: "kind=" + kind,
+            success: function (data) {
+                var value = progressBar.progressbar('getValue');
+                console.info(value)
+                if (value < 100) {
+                    if (data.kind == "attr") {
+                        value = data.attrValue == null ? "0" : data.attrValue;
+                    } else if (data.kind == "img") {
+                        value = data.imgValue == null ? "0" : data.imgValue;
+                    } else if (data.kind == "pdf") {
+                        value = data.pdfValue == null ? "0" : data.pdfValue;
+                    }else if (data.kind == "pdfimg") {
+                        value = data.pdfImgValue == null ? "0" : data.pdfImgValue;
+                    }
+                    progressBar.progressbar("setValue", value);
+                    if (value >= 100) {
+                        progressBar.progressbar('resize');
+                        $.messager.progress("close");
+                        clearInterval(timer)
+                    } else {
+                        timer = setInterval(showprogress(progressBar, kind, timer), 1000)//200ms调用一次
+                    }
+                }
+            }
+        });
+    }
+</script>
+</html>

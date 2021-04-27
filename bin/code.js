@@ -1,0 +1,7 @@
+function test(e){if(null==e)return"";var i,n,r,o={},s={},a="",c="",u="",p=2,h=3,l=2,f="",d=0,v=0,g=t._f;for(r=0;r<e.length;r+=1)if(a=e.charAt(r),Object.prototype.hasOwnProperty.call(o,a)||(o[a]=h++,s[a]=!0),c=u+a,Object.prototype.hasOwnProperty.call(o,c))u=c;else{if(Object.prototype.hasOwnProperty.call(s,u)){if(u.charCodeAt(0)<256){for(i=0;i<l;i++)d<<=1,15==v?(v=0,f+=g(d),d=0):v++;for(n=u.charCodeAt(0),i=0;i<8;i++)d=d<<1|1&n,15==v?(v=0,f+=g(d),d=0):v++,n>>=1}else{for(n=1,i=0;i<l;i++)d=d<<1|n,15==v?(v=0,f+=g(d),d=0):v++,n=0;for(n=u.charCodeAt(0),i=0;i<16;i++)d=d<<1|1&n,15==v?(v=0,f+=g(d),d=0):v++,n>>=1}0==--p&&(p=Math.pow(2,l),l++),delete s[u]}else for(n=o[u],i=0;i<l;i++)d=d<<1|1&n,15==v?(v=0,f+=g(d),d=0):v++,n>>=1;0==--p&&(p=Math.pow(2,l),l++),o[c]=h++,u=String(a)}if(""!==u){if(Object.prototype.hasOwnProperty.call(s,u)){if(u.charCodeAt(0)<256){for(i=0;i<l;i++)d<<=1,15==v?(v=0,f+=g(d),d=0):v++;for(n=u.charCodeAt(0),i=0;i<8;i++)d=d<<1|1&n,15==v?(v=0,f+=g(d),d=0):v++,n>>=1}else{for(n=1,i=0;i<l;i++)d=d<<1|n,15==v?(v=0,f+=g(d),d=0):v++,n=0;for(n=u.charCodeAt(0),i=0;i<16;i++)d=d<<1|1&n,15==v?(v=0,f+=g(d),d=0):v++,n>>=1}0==--p&&(p=Math.pow(2,l),l++),delete s[u]}else for(n=o[u],i=0;i<l;i++)d=d<<1|1&n,15==v?(v=0,f+=g(d),d=0):v++,n>>=1;0==--p&&(p=Math.pow(2,l),l++)}for(n=2,i=0;i<l;i++)d=d<<1|1&n,15==v?(v=0,f+=g(d),d=0):v++,n>>=1;for(;;){if(d<<=1,15==v){f+=g(d);break}v++}
+    var f="test";
+    console.info(f);
+    f+=g(d);
+    console.info(f);
+    JSON.stringify()
+    return f}
